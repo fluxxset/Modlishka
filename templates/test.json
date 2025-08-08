@@ -1,10 +1,10 @@
 {
-  "proxyDomain": "loopback.modlishka.io",
+  "proxyDomain": "fluxxset.com",
   "listeningAddress": "0.0.0.0",
   "proxyAddress": "",
-  "target": "microsoftonline.com",
+  "target": "fluxxset.com",
   "targetResources": "",
-  "rules": "by5zZXRBdHRyaWJ1dGUoImludGVncml0eSI=:by5zZXRBdHRyaWJ1dGUoImludGVnZHJpdHki,aW50ZWdyaXR5PQ==:aW50ZWdyaWN0eT0=,PC9oZWFkPg==:",
+  "rules": "",
   "terminateTriggers": "",
   "terminateRedirectUrl": "",
   "trackingCookie": "id",
