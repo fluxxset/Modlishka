@@ -1,6 +1,6 @@
 MAIN_FILE=main.go
 TEST_FILE=main_test.go
-BINARY_NAME=proxy
+BINARY_NAME=modlishka
 BINARY_LINUX=$(BINARY_NAME)_linux
 BINARY_WINDOWS=$(BINARY_NAME)_windows
 BINARY_BSD=$(BINARY_NAME)_freebsd
@@ -14,19 +14,19 @@ GOGET=$(GO) get
 .DEFAULT_GOAL := all
 .PHONY: test
 
-DIST_DIR=dist
+DIST_DIR=.
 TEST_DIR=
 all: test build
 build:
-	$(GOBUILD) -ldflags "-s -w" -o $(DIST_DIR)/$(BINARY_NAME)   $(MAIN_FILE)
+	$(GOBUILD) -ldflags "-s -w" -o $(BINARY_NAME) $(MAIN_FILE)
 test:
 	$(GOTEST) -v $(MAIN_FILE) $(TEST_FILE)
 clean:
 	$(GOCLEAN)
-	rm -f $(DIST_DIR)/$(BINARY_NAME)
-	rm -f $(DIST_DIR)/$(BINARY_LINUX)
-	rm -f $(DIST_DIR)/$(BINARY_WINDOWS)
-	rm -f $(DIST_DIR)/$(BINARY_BSD)
+	rm -f $(BINARY_NAME)
+	rm -f $(BINARY_LINUX)
+	rm -f $(BINARY_WINDOWS)
+	rm -f $(BINARY_BSD)
 
 deps:
 	$(GOGET) ./..
@@ -39,24 +39,24 @@ build_windows_xgo: test windows
 build_freebsd: test freebsd
 
 linux:
-	GOOS=linux GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(DIST_DIR)/$(BINARY_LINUX)  $(MAIN_FILE)
+	GOOS=linux GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(BINARY_LINUX) $(MAIN_FILE)
 
 windows:
-	GOOS=windows GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(DIST_DIR)/$(BINARY_WINDOWS)  $(MAIN_FILE)
+	GOOS=windows GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(BINARY_WINDOWS) $(MAIN_FILE)
 
 freebsd:
-	GOOS=freebsd GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(DIST_DIR)/$(BINARY_BSD)  $(MAIN_FILE)
+	GOOS=freebsd GOARCH=amd64 $(GOBUILD) -ldflags "-s -w" -o $(BINARY_BSD) $(MAIN_FILE)
 
 linux_amd64_xgo:
-	xgo --targets=linux/amd64  --dest $(DIST_DIR)/ ./
+	xgo --targets=linux/amd64  --dest ./
 
 linux_386_xgo:
-	xgo --targets=linux/386  --dest $(DIST_DIR)/ ./
+	xgo --targets=linux/386  --dest ./
 
 windows_xgo:
-	xgo --targets=windows/amd64  --dest $(DIST_DIR)/ ./
+	xgo --targets=windows/amd64  --dest ./
 
 freebsd_xgo:
-	xgo --targets=freebsd/amd64  --dest $(DIST_DIR)/ ./
+	xgo --targets=freebsd/amd64  --dest ./
 
 
